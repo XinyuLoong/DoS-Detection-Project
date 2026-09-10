@@ -1,0 +1,43 @@
+# config.yaml
+app:
+  db_engine: 'mysql'
+  version: "0.0.2"
+  
+filesystem:
+  rel_input_path: "../../../input"
+  rel_output_path: "../../../output"
+  conf_path: "etc"
+
+db_in:
+  host: "127.0.0.1"
+  port: 3306
+  user: "trim"
+  password: "011edelbec"
+  database: "pushinfo"
+  # input table
+  db_table: "history"
+
+db_out:
+  host: "127.0.0.1"
+  port: 3306
+  user: "trim"
+  password: "011edelbec"
+  database: "pushinfo"
+  # output table
+  db_table: "history"
+
+backup:
+  data_backup_list: 
+    - "csv"
+    - "table"
+    - "dump"
+  # if the output table is backed-up: csv, table, dump
+  # else empty 
+  data_backup: ""
+  # if overflow goes to another table (same server/user/database)
+  bkp_table: "histoflow"
+  # if backup goes to a dump file (relative to rel_output_path)
+  bkp_dumpfile: "table_dump.sql"
+  # if backup goes to a csv file (relative to rel_output_path)
+  bkp_csvbkpfile: "table_bkp.csv"
+  

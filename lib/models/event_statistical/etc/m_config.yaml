@@ -1,0 +1,33 @@
+# config.yaml
+app:
+  model_name: "event_statistical"
+  version: "0.1.2"
+
+filesystem:
+  rel_input_path: "../../../input"
+  rel_output_path: "../../../output"
+  conf_path: "etc"
+
+trimming:
+  trim_strategy_list:
+    - 'event'
+    - 'block'
+    - 'total'
+
+model:
+  # reordering procedures to apply:
+  #    delta0: start from bottom
+  #    delta1: start from top
+  #    normal: normal distribution centered on the middle
+  #    uniform: random with uniform distribution   
+  #    astride: adaptive stride avoiding ends
+  # parameters for normal distribution
+  nmean: 0.5
+  nstd: 6
+  # reordering procedure
+  proc: 'astride'
+
+var:
+  time_unit: "s"
+  # trim generated index column -- don't call it index
+  index_column: "i_Dx"

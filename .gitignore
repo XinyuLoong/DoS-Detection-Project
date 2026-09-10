@@ -1,0 +1,6 @@
+.venv/
+venv/
+PROFILE_REFACTOR_LOG.md
+__pycache__/
+*.pyc
+.DS_Store

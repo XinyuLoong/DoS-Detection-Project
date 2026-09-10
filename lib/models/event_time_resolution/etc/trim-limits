@@ -1,0 +1,13 @@
+  Rows  MaxTotalTrim  MaxTrim  Info0.1Rows  DupRows  DupEvents          Name          Desc
+ 77000         26129    53007                   505      68618  history_scram-0f.csv  clean + 1 legitimate activity peak
+ 85655         34781    61654                  3996      77273  history_scram-mf.csv  1 mild flood 5%
+120276         67406    86285                   504     110895  history_scram-df.csv  1 large distributed flood 25%
+163553        112675   139544        46187    35508     155171  history_scram-sf.csv  2 large floods 50% (original)
+163553        110679   129554                 18023     154172  history_scram-xf.csv  1 large flood 25% + 1 large distributed flood 25%
+
+
+
+MaxTotalTrim = max numbers of rows to be trimmed through the total strategy
+MaxTrim = max numbers of rows to be trimmed through the event_time_resolution model
+Info0.1Rows = how many rows are left when minimum event information is 0.1
+

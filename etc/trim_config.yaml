@@ -1,0 +1,73 @@
+# config.yaml
+app:
+  name: "trim"
+  version: "0.2.0"
+
+filesystem:
+  rel_input_path: "../input"
+  rel_output_path: "../output"
+  lib_path: "../lib"
+  conf_path: "../etc"
+  model_path: "../lib/models"
+  profile_test_path: "../lib/tests"
+  db_path: "../lib/db"
+
+filter:
+  filter_list: 
+    - "a"
+    - "map_toint"
+
+profile:
+  profile_levels:
+    - level: "l1"
+      tests:
+        - "event_uniqueness"
+        - "time_dist"
+        - "row_dup"
+    - level: "l2"
+      tests:
+        - "flood_score"
+  # legacy flat test list; used only if profile_levels is not defined
+  profile_list: 
+    - "event_uniqueness"
+    - "time_dist"
+    - "flood_score"
+    - "row_dup"
+  # time_dist:
+  # anomaly score threshold
+  td_anom_cutoff_score: 7.0
+  # time bin size (sec) for outlier analysis
+  time_bin: 3600
+  # event_uniqueness:
+  # anomaly score threshold
+  eu_anom_cutoff_score: 20.0
+  # flood_score:
+  # anomaly score threshold
+  fs_anom_cutoff_score: 7.0
+  # fraction of total event count should an event repeat
+  # to be considered for flooding analysis
+  flood_frac_threshold: 0.0001 
+  # default repeat count for an event to be considered for flooding analysis;
+  # max of N*flood_frac_threshold and flood_count_threshold is used
+  flood_count_threshold: 100
+  
+trimming:
+  trim_strategy_list:
+    - 'event'
+    - 'block'
+    - 'total'
+
+model:
+  model_list: 
+    - "event_age"
+    - "event_statistical"
+    - "event_time_resolution"
+    - "class_statistical"
+    - "ideal_perception"
+
+var:
+  time_unit: "s"
+  # trim generated index column -- don't call it index
+  index_column: "i_Dx"
+  db_engine: "mysql"
+  

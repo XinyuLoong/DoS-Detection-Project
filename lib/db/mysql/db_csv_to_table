@@ -1,0 +1,31 @@
+#!/bin/bash
+
+SPATH="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"    # dir of the script
+SNAME="$(basename ${BASH_SOURCE[0]})"                    # name of the script
+PATH="${SPATH}:${PATH}"                                  # access to scripts
+CONF="${SPATH}/../etc/${SNAME}.conf"                     # config file
+SCRIPT_DIR="${SPATH}"
+
+# initial config
+if [ -r "${TRIM_CONF}" ] ; then
+   echo "Sourcing the wrapper config file ${TRIM_CONF}"
+   . ${TRIM_CONF}
+fi
+
+# execute the python script with the same name
+python_bin=""
+if command -v python3 &>/dev/null; then
+   echo "Python 3 detected, running script... ${SNAME}.py"
+   python_bin=$( command -v python3 )
+elif command -v python &>/dev/null; then
+   python_version=$(python -c 'import sys; print(sys.version_info[0])')
+   if [ "$python_version" -eq 3 ]; then
+      python_bin=$( command -v python )
+   fi
+fi
+if [ -n "${python_bin}" ] ; then
+   exec ${python_bin} ${SNAME}.py $@
+else
+   echo "Error: Python 3 is required but not found"
+   exit 1
+fi

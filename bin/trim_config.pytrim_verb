@@ -1,0 +1,38 @@
+
+from collections import Counter
+import pandas as pd
+import numpy as np
+import os
+import sys
+
+# get the current path and insert it into python 
+TPATH = os.path.dirname(__file__)
+sys.path.insert(0, TPATH)
+
+import trim_lib as tlib
+
+def read_trim_config(verb):
+
+   trim_config = {"version": "0.0.1",
+                  "index_column" : "i_Dx",
+                  "rel_input_path": '../input',
+                  "rel_output_path": '../output',
+                  "filter_list": ["a", "map_toint"],
+                  "profile_list": ["event_uniqueness", "row_uniqueness", "time_dist"],
+                  "model_list": [],
+                  "trim_strategy_list": ['event', 'block', 'total'],
+                  "time_unit": 's'
+                  }
+   if not trim_config["index_column"]:
+      print(f"index column has empty name. Exiting")
+      exit(1)
+
+   if verb:
+      print(f"== Configuration:")
+      for key, value in trim_config.items():
+         print(f"   {key}: {value}")
+
+   return trim_config
+   
+   
+

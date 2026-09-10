@@ -1,0 +1,45 @@
+# config.yaml
+app:
+  model_name: "ideal_perception"
+  version: "0.1.2"
+
+filesystem:
+  rel_input_path: "../../../input"
+  rel_output_path: "../../../output"
+  conf_path: "etc"
+
+trimming:
+  trim_strategy_list:
+    - 'event'
+    - 'block'
+    - 'total'
+
+model:
+  # reordering procedures to apply:
+  #    delta0: start from bottom
+  #    delta1: start from top
+  #    normal: normal distribution centered on the middle
+  #    uniform: random with uniform distribution   
+  #    astride: adaptive stride avoiding ends
+  # parameters for normal distribution
+  nmean: 0.5
+  nstd: 6
+  # reordering procedure
+  proc: 'astride'
+  # attention factor: 0 -> 1       - older events contribute more
+  #                   1            - balanced
+  #                   1 -> infinty - newer events contribute more
+  alpha: 2.0
+
+block:
+  # splitting method:
+  #    slice: percentage of the minimum event info
+  #    cluster: clustering of low info events
+  split: slice
+  # parameters for slice
+  tolerance: 0.01
+  
+var:
+  time_unit: "s"
+  # trim generated index column -- don't call it index
+  index_column: "i_Dx"
