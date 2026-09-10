@@ -1,7 +1,3 @@
-# note：
-# template tests
-# specific config for each test
-
 import os
 import sys
 
