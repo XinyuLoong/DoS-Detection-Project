@@ -16,7 +16,7 @@
 - Question for N#2: how to make it converge? How to measure the Error or Improvement?
 - Note #3: Run from the top level: running a higher-level test should automatically trigger parameter tuning for its dependencies in the required order. Reuse saved tuning results when the dataset and relevant configurations are unchanged
 - Note #4: run iteration for each important params within the test.
--[ ] figure out the criteria for parameters selection
+- [ ] figure out the criteria for parameters selection
 - F1 score: for the dataset I made up for testing, we have a label to calculate F1 score; but for a real log data, it has no labels.
 - design a better criteria for parameter calibration...
 
