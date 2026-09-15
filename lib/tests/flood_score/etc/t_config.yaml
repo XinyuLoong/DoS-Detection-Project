@@ -1,0 +1,6 @@
+info:
+  name: "flood_score"
+  level: "l2"
+  description: "Combine event frequency and timestamp compactness into a flood score."
+  dependencies: ["event_uniqueness", "time_dist"]
+  supports_iteration: true

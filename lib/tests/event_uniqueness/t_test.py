@@ -1,3 +1,4 @@
+import importlib.util
 import os
 import sys
 
@@ -12,16 +13,17 @@ import trim_lib as tlib
 import profile_report as preport
 
 
+# Load the sibling config module by path to keep different tests isolated.
+config_path = os.path.join(os.path.dirname(__file__), "t_config.py")
+config_spec = importlib.util.spec_from_file_location(f"{__name__}_config", config_path)
+tc = importlib.util.module_from_spec(config_spec)
+config_spec.loader.exec_module(tc)
+
+
 def get_info():
    """Return metadata for the event uniqueness profile test."""
 
-   return {
-      "name": "event_uniqueness",
-      "level": "l1",
-      "description": "Profile event occurrence counts and find high-repeat event patterns.",
-      "dependencies": [],
-      "supports_iteration": True
-   }
+   return tc.read_t_config()["info"]
 
 
 def run(profile_context, profile_report, level_name):

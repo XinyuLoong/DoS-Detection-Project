@@ -1,0 +1,6 @@
+info:
+  name: "event_uniqueness"
+  level: "l1"
+  description: "Profile event occurrence counts and find high-repeat event patterns."
+  dependencies: []
+  supports_iteration: true

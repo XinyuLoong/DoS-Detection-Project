@@ -1,0 +1,6 @@
+info:
+  name: "row_dup"
+  level: "l1"
+  description: "Profile duplicate rows and duplicate event patterns."
+  dependencies: []
+  supports_iteration: true
