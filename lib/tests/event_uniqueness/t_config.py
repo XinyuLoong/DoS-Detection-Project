@@ -1,3 +1,4 @@
+import math
 import os
 import sys
 
@@ -48,6 +49,19 @@ def read_t_config():
    if info["name"] != os.path.basename(TPATH):
       print(f"Profile test name mismatch in configuration '{default_config_file}'.",
             file=sys.stderr)
+      sys.exit(1)
+
+   params = config.get("params")
+   if not isinstance(params, dict):
+      print(f"Configuration '{default_config_file}' must contain a params mapping.",
+            file=sys.stderr)
+      sys.exit(1)
+
+   value = params.get("eu_anom_cutoff_score")
+   if not (type(value) in (int, float) and value >= 0 and
+           (type(value) is int or math.isfinite(value))):
+      print((f"Configuration '{default_config_file}': params.eu_anom_cutoff_score "
+             "must be a finite non-negative number."), file=sys.stderr)
       sys.exit(1)
 
    return config

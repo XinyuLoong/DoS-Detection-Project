@@ -34,7 +34,8 @@ def run(profile_context, profile_report, level_name):
    stage = profile_context["stage"]
    output_dir = profile_context["run_output_abs_path"]
    verb = profile_context["trim_verb"]
-   config = profile_context["trim_config"]
+   config = tc.read_t_config()
+   params = config["params"]
    timestamp_column = profile_context["timestamp_column"]
 
    test_result = preport.new_test_result("time_dist", level_name, stage)
@@ -62,7 +63,7 @@ def run(profile_context, profile_report, level_name):
       preport.add_warning(test_result, "All timestamps are equal.")
       return test_result
 
-   timebin = min(config["profile"]["time_bin"], int((max_val-min_val)/10))
+   timebin = min(params["time_bin"], int((max_val-min_val)/10))
    if timebin < 1:
       timebin = 1
    start_bin = min_val - (min_val % timebin)
@@ -104,7 +105,7 @@ def run(profile_context, profile_report, level_name):
 
    flood_time_limits = []
    flood_time_dates = []
-   if outlier_score > config["profile"]["td_anom_cutoff_score"]:
+   if outlier_score > params["td_anom_cutoff_score"]:
       mask = labels == labels[0]
       bin_start_time_list_1 = bin_start_time_list[mask]
       bin_start_time_list_2 = bin_start_time_list[~mask]
@@ -152,7 +153,7 @@ def run(profile_context, profile_report, level_name):
    plt.ylabel(f"{stage} density")
    plt.yscale('log')
    plt.xticks(fontsize=6)
-   if outlier_score > config["profile"]["td_anom_cutoff_score"]:
+   if outlier_score > params["td_anom_cutoff_score"]:
       plt.title((f"Time anomaly score = {outlier_score:.1f}, "
                  f"avg {small_centroid:.0f} hourly flood events "
                  f"for {len(small_cluster)} hrs"), fontsize=10)

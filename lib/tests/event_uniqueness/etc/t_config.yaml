@@ -4,3 +4,7 @@ info:
   description: "Profile event occurrence counts and find high-repeat event patterns."
   dependencies: []
   supports_iteration: true
+
+params:
+  # anomaly score threshold
+  eu_anom_cutoff_score: 20.0

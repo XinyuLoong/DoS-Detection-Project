@@ -4,3 +4,9 @@ info:
   description: "Profile timestamp density and find suspicious time windows."
   dependencies: []
   supports_iteration: true
+
+params:
+  # anomaly score threshold
+  td_anom_cutoff_score: 7.0
+  # time bin size (sec) for outlier analysis
+  time_bin: 3600

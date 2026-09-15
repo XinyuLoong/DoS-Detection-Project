@@ -4,3 +4,12 @@ info:
   description: "Combine event frequency and timestamp compactness into a flood score."
   dependencies: ["event_uniqueness", "time_dist"]
   supports_iteration: true
+
+params:
+  # anomaly score threshold
+  fs_anom_cutoff_score: 7.0
+  # fraction of total event count for flooding analysis
+  flood_frac_threshold: 0.0001
+  # repeat count for flooding analysis;
+  # max of N*flood_frac_threshold and flood_count_threshold is used
+  flood_count_threshold: 100

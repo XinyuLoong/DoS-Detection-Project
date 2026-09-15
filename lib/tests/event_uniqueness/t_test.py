@@ -34,7 +34,8 @@ def run(profile_context, profile_report, level_name):
    event_column_list = profile_context["event_column_list"]
    output_dir = profile_context["run_output_abs_path"]
    verb = profile_context["trim_verb"]
-   config = profile_context["trim_config"]
+   config = tc.read_t_config()
+   params = config["params"]
 
    test_result = preport.new_test_result("event_uniqueness", level_name, stage)
    tlib.vprint(verb, f"{stage} event_uniqueness:", 1)
@@ -76,7 +77,7 @@ def run(profile_context, profile_report, level_name):
    suspicious_event_df = event_counts_df[
       event_counts_df["Occurrences"].isin(small_cluster)
    ]
-   if outlier_score > config["profile"]["eu_anom_cutoff_score"]:
+   if outlier_score > params["eu_anom_cutoff_score"]:
       for _, row in suspicious_event_df.iterrows():
          values = {col: row[col] for col in event_column_list}
          preport.add_suspicious_unit(
@@ -95,7 +96,7 @@ def run(profile_context, profile_report, level_name):
    plt.ylabel(f"{stage} events")
    plt.xscale('log')
    plt.yscale('log')
-   if outlier_score > config["profile"]["eu_anom_cutoff_score"]:
+   if outlier_score > params["eu_anom_cutoff_score"]:
       plt.title((f"Uniq anomaly score = {outlier_score:.1f}, "
                  f"{len(small_cluster)} events, "
                  f"{small_centroid:.0f} avg occurrences"), fontsize=10)

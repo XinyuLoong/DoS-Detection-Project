@@ -34,14 +34,15 @@ def run(profile_context, profile_report, level_name):
    event_column_list = profile_context["event_column_list"]
    output_dir = profile_context["run_output_abs_path"]
    verb = profile_context["trim_verb"]
-   config = profile_context["trim_config"]
+   config = tc.read_t_config()
+   params = config["params"]
    idx_column = profile_context["idx_column"]
 
    test_result = preport.new_test_result("flood_score", level_name, stage)
    tlib.vprint(verb, f"{stage} flood_score:", 1)
 
-   count_threshold = max(config["profile"]["flood_count_threshold"],
-                  int(len(df) * config["profile"]["flood_frac_threshold"]))
+   count_threshold = max(params["flood_count_threshold"],
+                  int(len(df) * params["flood_frac_threshold"]))
 
    flood_score_df = tlib.flood_event_stats(df, event_column_list, count_threshold)
    while count_threshold > 0 and len(flood_score_df) < 10:
@@ -59,7 +60,7 @@ def run(profile_context, profile_report, level_name):
          preport.get_metric(profile_report, "time_dist", "anomaly_score", 0.0))
 
    if len(flood_score_df) < 1 or \
-         flood_score_df['Occurrences'].max() < config["profile"]["flood_count_threshold"]:
+         flood_score_df['Occurrences'].max() < params["flood_count_threshold"]:
       tlib.vprint(verb, f"No events have high occurrence rate.", 1)
       tlib.vprint(verb, f"{stage} flood_score: outlier_score = 0.0", 1)
       test_result["status"] = "skipped"
@@ -93,7 +94,7 @@ def run(profile_context, profile_report, level_name):
    flood_index_list = []
    flood_trim_nr = 0
 
-   if outlier_score > config["profile"]["fs_anom_cutoff_score"]:
+   if outlier_score > params["fs_anom_cutoff_score"]:
       occurence_mask = flood_score_df['FloodScore'].isin(small_cluster)
       flooding_events_df = flood_score_df[occurence_mask]
       tlib.vprint(verb, f"{stage} flood_score: flooding_events_df", 3)
@@ -143,7 +144,7 @@ def run(profile_context, profile_report, level_name):
    plt.xlabel("timestamp")
    plt.ylabel(f"{stage} event flood score")
    plt.xticks(fontsize=6)
-   if outlier_score > config["profile"]["fs_anom_cutoff_score"]:
+   if outlier_score > params["fs_anom_cutoff_score"]:
       plt.title((f"Flood anomaly score = {outlier_score:.1f},"
                  f" {len(small_cluster)} flooding events"), fontsize=10)
    else:
