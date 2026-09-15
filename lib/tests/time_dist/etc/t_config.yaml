@@ -1,0 +1,6 @@
+info:
+  name: "time_dist"
+  level: "l1"
+  description: "Profile timestamp density and find suspicious time windows."
+  dependencies: []
+  supports_iteration: true
