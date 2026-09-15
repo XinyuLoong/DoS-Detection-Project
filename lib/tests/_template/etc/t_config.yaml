@@ -1,0 +1,22 @@
+# ================= TODO: Test metadata =======================
+info:
+  # Must match the copied test directory name.
+  name: "_template"
+  # Describes the intended level; profile_levels controls actual scheduling.
+  level: "l1"
+  description: "TODO: Describe what this test measures or detects."
+  # List prerequisite test names, then schedule them before this test.
+  dependencies: []
+  # Set according to the implemented test; this flag does not schedule repeats.
+  supports_iteration: false
+# ====================== END TODO =============================
+
+# ================= TODO: Test parameters =====================
+# Add only parameters used by run(), with their units and purpose in comments.
+# Validate each parameter in t_config.py. Keep {} if there are no parameters.
+params: {}
+# Example replacement:
+# params:
+#   # Minimum occurrence count (non-negative integer).
+#   min_count: 10
+# ====================== END TODO =============================
