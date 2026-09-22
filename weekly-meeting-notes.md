@@ -24,4 +24,4 @@
 - [ ] Just create a structure for iteration (parameter tuning) and do not need to find a set of general parameters that is suitable for every datasets.
 - [ ] Use only synthetic anomalies first.
 - [ ] Start testing tests based on synthetic anomalies.
-- [ ] Use the Power(P) to test if my tests work.
+- [ ] Use the Power(P) to test if my tests work. (inject anomalies with diffenrent levels of noises, and see if the current test's detection power can follow the pattern.)
