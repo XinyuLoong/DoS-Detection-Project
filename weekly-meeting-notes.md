@@ -20,4 +20,8 @@
 - F1 score: for the dataset I made up for testing, we have a label to calculate F1 score; but for a real log data, it has no labels.
 - design a better criteria for parameter calibration...
 
-
+## September 22, 2026
+- [ ] Just create a structure for iteration (parameter tuning) and do not need to find a set of general parameters that is suitable for every datasets.
+- [ ] Use only synthetic anomalies first.
+- [ ] Start testing tests based on synthetic anomalies.
+- [ ] Use the Power(P) to test if my tests work.
