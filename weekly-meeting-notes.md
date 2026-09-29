@@ -21,7 +21,11 @@
 - design a better criteria for parameter calibration...
 
 ## September 22, 2026
-- [ ] Just create a structure for iteration (parameter tuning) and do not need to find a set of general parameters that is suitable for every datasets.
-- [ ] Use only synthetic anomalies first.
+- [X] Just create a structure for iteration (parameter tuning) and do not need to find a set of general parameters that is suitable for every datasets.
+- [X] Use only synthetic anomalies first.
 - [ ] Start testing tests based on synthetic anomalies.
 - [ ] Use the Power(P) to test if my tests work. (inject anomalies with diffenrent levels of noises, and see if the current test's detection power can follow the pattern.)
+
+## September 29, 2026
+- [ ] modulize the data generation code
+- [ ] simple tests to test this program and use the Power(P) to test if those tests works. (or set another goal, TBD)
