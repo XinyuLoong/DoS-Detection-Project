@@ -22,8 +22,8 @@ def load_config(filepath):
       sys.exit(1)
 
 
-def read_t_config():
-   """Read and validate this profile test's configuration."""
+def read_t_config(parameter_overrides=None):
+   """Read YAML defaults, merge runtime overrides, and validate the result."""
    config = load_config(default_config_file)
 
    # ================= COMMON: Metadata validation ============
@@ -61,6 +61,14 @@ def read_t_config():
       print(f"Configuration '{default_config_file}' must contain a params mapping.",
             file=sys.stderr)
       sys.exit(1)
+
+   if parameter_overrides is not None:
+      if not isinstance(parameter_overrides, dict):
+         raise ValueError("Parameter overrides must be a mapping")
+      unknown = set(parameter_overrides) - set(params)
+      if unknown:
+         raise ValueError(f"Unknown parameters for {info['name']}: {unknown}")
+      params.update(parameter_overrides)
 
    # ================= TODO: Parameter validation =============
    # For every parameter used in run(), check presence, type, and valid range.

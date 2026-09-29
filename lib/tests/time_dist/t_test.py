@@ -34,7 +34,8 @@ def run(profile_context, profile_report, level_name):
    stage = profile_context["stage"]
    output_dir = profile_context["run_output_abs_path"]
    verb = profile_context["trim_verb"]
-   config = tc.read_t_config()
+   config = tc.read_t_config(
+      profile_context.get("parameter_overrides", {}).get('time_dist'))
    params = config["params"]
    timestamp_column = profile_context["timestamp_column"]
 

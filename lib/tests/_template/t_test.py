@@ -36,7 +36,8 @@ def run(profile_context, profile_report, level_name):
    """Analyze the shared input and return this test's standard result."""
 
    # ================= COMMON: Setup ==========================
-   config = tc.read_t_config()
+   config = tc.read_t_config(
+      profile_context.get("parameter_overrides", {}).get(tc.read_t_config()["info"]["name"]))
    test_name = config["info"]["name"]
    params = config["params"]
    df = profile_context["df"]

@@ -25,6 +25,7 @@ import trim_input as tinput
 import trim_output as tout
 import trim_filter as tfilter
 import profile_runner as prunner
+import profile_iteration as piteration
 
 
 stage = ""
@@ -65,6 +66,12 @@ def create_profile(df, stg):
 
    return profile_report
 
+def create_iteration_profile(df, stg):
+   return piteration.run_iteration(
+      df,
+      stg,
+      profile_once=create_profile
+   )
 
 if __name__ == "__main__":
 
@@ -77,6 +84,8 @@ if __name__ == "__main__":
                help='input data, a csv file or use db for a database table', default='')
    parser.add_argument('-x', '--exclude_column', action='append',
                help='column to exclude from event definition', default=[])
+   parser.add_argument('-iter', dest='iteration', action='store_true', 
+               help='run profiling through the iteration wrapper')
    parser.add_argument('-o', '--output_dest', type=str,
                help='output destination, a csv file or use db for a database table', default='')
    parser.add_argument('-f', '--filter_dataset', action='append',
@@ -126,4 +135,7 @@ if __name__ == "__main__":
                         '/filtered_main.csv')
 
    # create initial profile
-   create_profile(initial_df, "initial")
+   if args.iteration:
+      create_iteration_profile(initial_df, "initial")
+   else:
+      create_profile(initial_df, "initial")

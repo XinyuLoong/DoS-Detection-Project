@@ -34,7 +34,8 @@ def run(profile_context, profile_report, level_name):
    event_column_list = profile_context["event_column_list"]
    output_dir = profile_context["run_output_abs_path"]
    verb = profile_context["trim_verb"]
-   config = tc.read_t_config()
+   config = tc.read_t_config(
+      profile_context.get("parameter_overrides", {}).get('flood_score'))
    params = config["params"]
    idx_column = profile_context["idx_column"]
 

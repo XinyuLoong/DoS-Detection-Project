@@ -20,8 +20,8 @@ def load_config(filepath):
       sys.exit(1)
 
 
-def read_t_config():
-   """Read and validate this profile test's configuration."""
+def read_t_config(parameter_overrides=None):
+   """Read YAML defaults, merge runtime overrides, and validate the result."""
    config = load_config(default_config_file)
    if not isinstance(config, dict) or not isinstance(config.get("info"), dict):
       print(f"Configuration '{default_config_file}' must contain an info mapping.",
@@ -56,6 +56,14 @@ def read_t_config():
       print(f"Configuration '{default_config_file}' must contain a params mapping.",
             file=sys.stderr)
       sys.exit(1)
+
+   if parameter_overrides is not None:
+      if not isinstance(parameter_overrides, dict):
+         raise ValueError("Parameter overrides must be a mapping")
+      unknown = set(parameter_overrides) - set(params)
+      if unknown:
+         raise ValueError(f"Unknown parameters for {info['name']}: {unknown}")
+      params.update(parameter_overrides)
 
    value = params.get("fs_anom_cutoff_score")
    if not (type(value) in (int, float) and value >= 0 and
