@@ -1,0 +1,28 @@
+# Background plus two exact attacks targeting different complete events.
+# Distinct event_group values guarantee distinct targets within the exact type.
+# Each attack independently selects a random start; windows may overlap.
+seed: 42
+timestamp_column: updated
+event_columns: [scope, source, field, value, signature]
+
+background:
+  type: normal
+  params:
+    n_rows: 10000
+
+attacks:
+  - id: attack_1
+    type: exact
+    event_group: target_a
+    params:
+      n_rows: 500
+      duration: 60
+      attack_start: null
+
+  - id: attack_2
+    type: exact
+    event_group: target_b
+    params:
+      n_rows: 800
+      duration: 60
+      attack_start: null

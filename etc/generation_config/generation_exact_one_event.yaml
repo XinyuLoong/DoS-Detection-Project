@@ -1,0 +1,18 @@
+# Background plus one exact attack targeting one complete event.
+seed: 42
+timestamp_column: updated
+event_columns: [scope, source, field, value, signature]
+
+background:
+  type: normal
+  params:
+    n_rows: 10000
+
+attacks:
+  - id: attack_1
+    type: exact
+    event_group: target_a
+    params:
+      n_rows: 500
+      duration: 60
+      attack_start: null

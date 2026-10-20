@@ -27,5 +27,8 @@
 - [ ] Use the Power(P) to test if my tests work. (inject anomalies with diffenrent levels of noises, and see if the current test's detection power can follow the pattern.)
 
 ## September 29, 2026
-- [ ] modulize the data generation code
+- [X] modulize the data generation code
+- [X] generate 3 type of datasets: normal, exact event(1 event), exact event(2 event)
 - [ ] simple tests to test this program and use the Power(P) to test if those tests works. (or set another goal, TBD)
+
+## October 20, 2026

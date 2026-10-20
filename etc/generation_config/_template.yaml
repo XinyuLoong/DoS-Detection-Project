@@ -1,0 +1,43 @@
+# One background and multiple attacks. Null starts are chosen within the reference range.
+seed: 42
+timestamp_column: updated
+event_columns: [scope, source, field, value, signature]
+
+background:
+  type: normal
+  params:
+    n_rows: 10000
+
+attacks:
+  - id: attack_1
+    type: exact
+    event_group: target_a
+    params:
+      n_rows: 500
+      duration: 60
+      attack_start: null
+
+  - id: attack_2
+    type: exact
+    event_group: target_a
+    params:
+      n_rows: 800
+      duration: 120
+      attack_start: null
+
+  - id: attack_3
+    type: exact
+    event_group: target_b
+    params:
+      n_rows: 300
+      duration: 60
+      attack_start: null
+
+  # Optional mixed-type attack. Requires at least 100 distinct matching events.
+  # - id: attack_4
+  #   type: distributed
+  #   event_group: distributed_a
+  #   params:
+  #     n_rows: 100
+  #     shared_fields: 3
+  #     duration: 60

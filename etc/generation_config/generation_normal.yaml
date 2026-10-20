@@ -1,0 +1,11 @@
+# Background only. Use the same reference CSV for all three experiments.
+seed: 42
+timestamp_column: updated
+event_columns: [scope, source, field, value, signature]
+
+background:
+  type: normal
+  params:
+    n_rows: 10000
+
+attacks: []
