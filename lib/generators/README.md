@@ -7,7 +7,9 @@ python input/data_generate.py -i input/history_scram-0f.csv
 ```
 
 The command writes `input/synthetic.csv` and `input/synthetic.json`, ready for
-later profiling. The JSON records the
+later profiling. CSV rows are sorted by ascending timestamp, matching the
+reference datasets; equal timestamps retain their order from generation.
+The JSON records the
 effective parameters, input/output paths, seed, selected events, actual attack
 windows (exclusive end), counts, and warnings. Reference timestamps must be
 finite integer-valued numbers interpreted as seconds. Window starts may be null
@@ -99,13 +101,14 @@ explicitly rather than silently dropping missing columns.
 
 ## Reproducibility and labels
 
-Named random streams separate background, event-group selection, each attack ID,
-and final shuffling. For the same data/configuration/library versions, results
+Named random streams separate background, event-group selection, and each attack ID.
+After combining all rows, the generator performs a stable ascending timestamp sort.
+For the same data/configuration/library versions, results
 are repeatable and reordering attacks does not change output. Changing the count
-of one exact attack does not alter another attack's unshuffled records. Adding,
+of one exact attack does not alter another attack's records. Adding,
 renaming, or resizing event groups can change allocation for other groups because
-they compete for disjoint events. Changing total row count changes final shuffle
-positions.
+they compete for disjoint events. Adding rows can change existing rows' positions
+in the final sorted dataset.
 
 `truth_label`, `attack_type`, and `attack_id` record row provenance; they are not
 detector inputs. Exclude all three from profiling event fields. Background rows

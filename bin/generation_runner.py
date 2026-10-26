@@ -210,8 +210,8 @@ def generate_dataset(reference_df, experiment_config):
         records.append(record)
 
     combined = pd.concat([frame for frame in frames if len(frame)], ignore_index=True)
-    combined = combined.sample(frac=1, random_state=make_rng(seed, "shuffle")).reset_index(drop=True)
     combined[timestamp] = combined[timestamp].astype(np.int64)
+    combined = combined.sort_values(by=timestamp, ascending=True, kind="stable", ignore_index=True)
     manifest = {
         "schema_version": 1, "seed": seed, "timestamp_column": timestamp,
         "event_columns": columns, "reference_rows": len(reference), "total_rows": len(combined),

@@ -36,7 +36,9 @@ DATA GENERATION WORKFLOW
         --config etc/generation_config/experiment2.yaml
 
 3. Inspect the output CSV, its sibling JSON generation record, and the
-   printed summary. The JSON records effective parameters, selected events,
+   printed summary. CSV rows are saved in ascending timestamp order, matching
+   the reference datasets. Equal timestamps retain their order from generation.
+   The JSON records effective parameters, selected events,
    actual attack windows, generated row counts, and warnings.
    CSV labels truth_label, attack_type, and attack_id identify row provenance.
    Exclude all three labels from detector input features.
@@ -49,7 +51,7 @@ bin/generation_runner.py:
    -> dynamically load generators and merge their default parameters
    -> resolve event groups using independent, reproducible random streams
    -> generate background and each attack
-   -> validate results, add labels, combine rows, and shuffle
+   -> validate results, add labels, combine rows, and sort by ascending timestamp
    -> return the dataset and generation record to this script.
 This script then saves the CSV/JSON and prints the summary.
 

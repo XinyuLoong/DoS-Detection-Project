@@ -29,6 +29,10 @@
 ## September 29, 2026
 - [X] modulize the data generation code
 - [X] generate 3 type of datasets: normal, exact event(1 event), exact event(2 event)
-- [ ] simple tests to test this program and use the Power(P) to test if those tests works. (or set another goal, TBD)
+- [X] simple tests to test this program and use the Power(P) to test if those tests works. (or set another goal, TBD)
+- [X] read papers for detection algorithm
 
 ## October 20, 2026
+- [ ] checke quotation marks (simple to double), use git diff
+- [ ] check if the code is stable or not. If not, fix it.
+- [ ] 
